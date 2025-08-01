@@ -1,18 +1,33 @@
-//gitpackage com.example.learn
+package com.example.learn
 
+import AlertDialogBox
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
+
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-//import androidx.compose.foundation.layout.paddinggit
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.learn.topics.ColorBox
 import com.example.learn.ui.theme.LearnTheme
+
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,29 +35,69 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LearnTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                var selectedItem by remember { mutableStateOf(0) }
+                val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+                val scope = rememberCoroutineScope()
+                ModalNavigationDrawer(
+                    drawerState = drawerState,
+                    drawerContent = {
+                        ModalDrawerSheet {
+                            Text("Drawer title")
+                            HorizontalDivider()
+                            NavigationDrawerItem(
+                                label = { Text("Colors topicColors.kt ", fontSize = 20.sp) },
+                                selected = false,
+                                onClick = {
+                                   // showColoredBox = true
+                                   // showAlertDialogBox=false
+                                   selectedItem=1
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
+                                    /* Handle item click */
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = {
+                                    Text(
+                                        "Alert Dialog alertDialogBox.kt ",
+                                        fontSize = 20.sp
+                                    )
+                                },
+                                selected = false,
+                                onClick = {
+                                   // showAlertDialogBox = true
+                                    //showColoredBox=false
+                                    selectedItem=2
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
+                                    /* Handle item click */
+                                }
+                            )
+                        }
+                    })
+                {
+                    if(selectedItem==1) {
+                        ColorBox()
+                    } else if(selectedItem==2) {
+                        AlertDialogBox()
+                    } else {
+                        Column(
+                            modifier = Modifier
+                                .padding(50.dp)
+                        ) {
+                            Text(
+                                "Click something in the drawer to show on the screen",
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
+                    // logic to show the selected topic from navigation drawer
                 }
+
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LearnTheme {
-        Greeting("Android")
-    }
-}
