@@ -12,29 +12,67 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = PrimaryDarkColor,
+    onPrimary = PrimaryDarkText,
+    primaryContainer = PrimaryDarkColor,
+    onPrimaryContainer = PrimaryDarkText,
+
     secondary = SecondaryDarkColor,
+    onSecondary = SecondaryDarkText,
+    secondaryContainer = SecondaryDarkColor,
+    onSecondaryContainer = SecondaryDarkText,
+
+    background = BackgroundDarkColor,
+    onBackground = PrimaryDarkText,
+
+    surface = BackgroundDarkScreenColor,
+    onSurface = PrimaryDarkText,
+    surfaceVariant = SecondaryDarkColor,
+    onSurfaceVariant = SecondaryDarkText,
+
+    outline = SecondaryDarkText,
+    outlineVariant = SecondaryDarkColor,
+
+    inverseSurface = BackgroundLightScreenColor,
+    inverseOnSurface = PrimaryLightText,
+    inversePrimary = PrimaryLightColor,
+
+    surfaceTint = PrimaryDarkColor
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = PrimaryLightColor,
-    secondary = SecondaryLightColor,
+    onPrimary = PrimaryLightText,
+    primaryContainer = PrimaryLightColor,
+    onPrimaryContainer = PrimaryLightText,
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    secondary = SecondaryLightColor,
+    onSecondary = SecondaryLightText,
+    secondaryContainer = SecondaryLightColor,
+    onSecondaryContainer = SecondaryLightText,
+
+    background = BackgroundLightColor,
+    onBackground = PrimaryLightText,
+
+    surface = BackgroundLightScreenColor,
+    onSurface = PrimaryLightText,
+    surfaceVariant = SecondaryLightColor,
+    onSurfaceVariant = SecondaryLightText,
+
+    outline = SecondaryLightText,
+    outlineVariant = SecondaryLightColor,
+
+    inverseSurface = BackgroundDarkScreenColor,
+    inverseOnSurface = PrimaryDarkText,
+    inversePrimary = PrimaryDarkColor,
+
+    surfaceTint = PrimaryLightColor
 )
 
 @Composable
 fun LearnTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false, // Set to false to use your custom colors
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

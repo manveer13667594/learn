@@ -1,16 +1,26 @@
 package com.example.learn.topics
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.learn.ui.theme.BackgroundDarkColor
 import com.example.learn.ui.theme.BackgroundDarkScreenColor
 import com.example.learn.ui.theme.BackgroundLightColor
@@ -25,155 +35,108 @@ import com.example.learn.ui.theme.SecondaryLightColor
 import com.example.learn.ui.theme.SecondaryLightText
 
 @Composable
-fun ColorBox() {
-    Row(
+fun ColorBox(isDarkTheme: Boolean) {
+    Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(16.dp)
     ) {
-        LazyColumn {
-            items(1) {
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(PrimaryDarkColor)
-                ) {
+        // Title
+        Text(
+            text = "Color Palette - ${if (isDarkTheme) "Dark" else "Light"} Theme",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Material Theme Colors Column
+            LazyColumn(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item {
                     Text(
-                        "PrimaryDarkColor",
-                        color = PrimaryDarkText
-                    )// Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(SecondaryDarkColor)
-                ) {
-                    Text(
-                        "SecondaryDarkColor",
-                        color = PrimaryDarkText
-                    ) // Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(BackgroundDarkColor)
-                ) {
-                    Text(
-                        "BackgroundDarkColor",
-                        color = PrimaryDarkText
-                    ) // Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(BackgroundDarkScreenColor)
-                ) {
-                    Text(
-                        "BackgroundDarkScreenColor",
-                        color = PrimaryDarkText
-                    )// Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(PrimaryDarkText)
-                ) {
-                    Text(
-                        "PrimaryDarkText",
-                        color = SecondaryDarkText
+                        "Material Theme Colors",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(bottom = 8.dp)
                     )
-                    // Content goes here
                 }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(SecondaryDarkText)
-                ) {
-                    Text(
-                        "SecondaryDarkText",
-                        color = PrimaryDarkText
-                    )
-                    // Content goes here
+                item {
+                    ColorCard("Primary", MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.onPrimary)
+                }
+                item {
+                    ColorCard("Secondary", MaterialTheme.colorScheme.secondary, MaterialTheme.colorScheme.onSecondary)
+                }
+                item {
+                    ColorCard("Background", MaterialTheme.colorScheme.background, MaterialTheme.colorScheme.onBackground)
+                }
+                item {
+                    ColorCard("Surface", MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.onSurface)
+                }
+                item {
+                    ColorCard("Surface Variant", MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
-        }
-        LazyColumn {
-            items(1) {
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(PrimaryLightColor)
-                ) {
+
+            // Custom Colors Column
+            LazyColumn(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item {
                     Text(
-                        "PrimaryLightColor",
-                        color = PrimaryLightText
-                    )// Content goes here
+                        "Custom ${if (isDarkTheme) "Dark" else "Light"} Colors",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
                 }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(SecondaryLightColor)
-                ) {
-                    Text(
-                        "SecondaryLightColor",
-                        color = PrimaryLightText
-                    ) // Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(BackgroundLightColor)
-                ) {
-                    Text(
-                        "BackgroundLightColor",
-                        color = PrimaryLightText
-                    ) // Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(BackgroundLightScreenColor)
-                ) {
-                    Text(
-                        "BackgroundLightScreenColor",
-                        color = PrimaryLightText
-                    )// Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(PrimaryLightText)
-                ) {
-                    Text(
-                        "PrimaryLightText",
-                        color = SecondaryLightText
-                    )// Content goes here
-                }
-                Box(
-                    modifier = Modifier
-//          .fillMaxSize()
-                        .size(100.dp)
-                        .background(SecondaryLightText)
-                ) {
-                    Text(
-                        "SecondaryLightColor",
-                        color = PrimaryLightText
-                    ) // Content goes here
+
+                if (isDarkTheme) {
+                    item { ColorCard("Primary Dark", PrimaryDarkColor, PrimaryDarkText) }
+                    item { ColorCard("Secondary Dark", SecondaryDarkColor, PrimaryDarkText) }
+                    item { ColorCard("Background Dark", BackgroundDarkColor, PrimaryDarkText) }
+                    item { ColorCard("Screen Dark", BackgroundDarkScreenColor, PrimaryDarkText) }
+                    item { ColorCard("Primary Text", PrimaryDarkText, SecondaryDarkText) }
+                    item { ColorCard("Secondary Text", SecondaryDarkText, PrimaryDarkText) }
+                } else {
+                    item { ColorCard("Primary Light", PrimaryLightColor, PrimaryLightText) }
+                    item { ColorCard("Secondary Light", SecondaryLightColor, PrimaryLightText) }
+                    item { ColorCard("Background Light", BackgroundLightColor, PrimaryLightText) }
+                    item { ColorCard("Screen Light", BackgroundLightScreenColor, PrimaryLightText) }
+                    item { ColorCard("Primary Text", PrimaryLightText, SecondaryLightText) }
+                    item { ColorCard("Secondary Text", SecondaryLightText, PrimaryLightText) }
                 }
             }
         }
     }
 }
 
+@Composable
+private fun ColorCard(name: String, backgroundColor: Color, textColor: Color) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .size(80.dp)
+                .background(backgroundColor),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = name,
+                color = textColor,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
+    }
+}
