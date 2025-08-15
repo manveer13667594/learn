@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,20 +36,29 @@ import com.example.learn.ui.theme.SecondaryLightColor
 import com.example.learn.ui.theme.SecondaryLightText
 
 @Composable
-fun ColorBox(isDarkTheme: Boolean) {
+fun ColorBox(isDarkTheme: Boolean,    onThemeChange: (Boolean) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
     ) {
-        // Title
-        Text(
-            text = "Color Palette - ${if (isDarkTheme) "Dark" else "Light"} Theme",
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        Row(
+            modifier = Modifier.padding(0.dp, 10.dp, 20.dp, 16.dp),
+        ){// Title
+            Text(
+                text = "Color Palette - ${if (isDarkTheme) "Dark" else "Light"} Theme",
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            Switch(
+                checked = isDarkTheme,
+                onCheckedChange = onThemeChange
+
+            )  }
+
 
         Row(
             modifier = Modifier.fillMaxSize(),

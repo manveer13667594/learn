@@ -120,7 +120,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             when (selectedItem) {
                                 1 -> {
-                                    ColorBox(isDarkTheme = isDarkTheme)
+                                    ColorBox(isDarkTheme = isDarkTheme, onThemeChange = { isDarkTheme = it })
                                 }
                                 2 -> {
                                     AlertDialogBox()

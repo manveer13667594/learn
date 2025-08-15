@@ -74,7 +74,9 @@ fun AlertDialogBox() {
             // Get current theme state from MaterialTheme
             val isDarkTheme = MaterialTheme.colorScheme.background ==
                     androidx.compose.material3.darkColorScheme().background
-            ColorBox(isDarkTheme = isDarkTheme)
+            ColorBox(isDarkTheme = isDarkTheme,
+                onThemeChange = { /* No action needed here */ }
+            )
         } else {
             Text(
                 text = "Click the button to show the alert dialog box.",
